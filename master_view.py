@@ -3,21 +3,23 @@ import os
 from Crypto.PublicKey import RSA
 from Crypto import Random
 
+decryption_key_file = 'decryption_key.txt'
+
 def decrypt_valuables(f):
     decryption_key = get_decryption_key_from_file()
     decoded_text = decryption_key.decrypt(f)
     print(decoded_text)
 
 def get_decryption_key_from_file():
-    # TODO: Private key is saved in a file; read it and use it
-    key_read = 'test'
-
+    file = open(decryption_key_file, 'r')
+    key_read = file.read()
     decryption_key = RSA.importKey(key_read)
     return decryption_key
 
 def generate_key_pair():
     random_generator = Random.new().read
     key = RSA.generate(4096, random_generator)
+
     public_key = key.publickey()
     public_key = public_key.exportKey()
     print("Public Key: {}".format(public_key))

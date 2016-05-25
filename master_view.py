@@ -2,8 +2,11 @@ import os
 
 from Crypto.PublicKey import RSA
 from Crypto import Random
+from base64 import b64decode
 
 decryption_key_file = 'decryption_key.txt'
+# TODO: Get a better password
+password = "testtest"
 
 def decrypt_valuables(f):
     decryption_key = get_decryption_key_from_file()
@@ -11,21 +14,24 @@ def decrypt_valuables(f):
     print(decoded_text)
 
 def get_decryption_key_from_file():
-    file = open(decryption_key_file, 'r')
-    key_read = file.read()
-    decryption_key = RSA.importKey(key_read)
+    file = open(decryption_key_file, 'rb')
+    encrypted_key = file.read()
+    file.close()
+    decryption_key = RSA.importKey(encrypted_key, passphrase=password)
+    print("Private key read: {}".format(decryption_key.exportKey()))
     return decryption_key
 
 def generate_key_pair():
-    random_generator = Random.new().read
-    key = RSA.generate(4096, random_generator)
+    key = RSA.generate(4096)
 
     public_key = key.publickey()
     public_key = public_key.exportKey()
     print("Public Key: {}".format(public_key))
 
-    private_key = key.exportKey()
-    print("Private Key: {}".format(private_key))
+    encrypted_private_key = key.exportKey(passphrase=password, pkcs=8)
+    file_out = open(decryption_key_file, "wb")
+    file_out.write(encrypted_private_key)
+    print("Private key: {}".format(key.exportKey()))
 
 
 if __name__ == "__main__":

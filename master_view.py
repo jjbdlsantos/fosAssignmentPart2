@@ -1,23 +1,29 @@
 import os
 
 from Crypto.PublicKey import RSA
-
+from Crypto import Random
 
 def decrypt_valuables(f):
-    # TODO: For Part 2, you'll need to decrypt the contents of this file
-    # The existing scheme uploads in plaintext
-    # As such, we just convert it back to ASCII and print it out
-    decoded_text = str(f, 'ascii')
-
-    # 4096 bit keys for RSA
+    decryption_key = get_decryption_key_from_file()
+    decoded_text = decryption_key.decrypt(f)
     print(decoded_text)
 
-def read_decryption_key_from_file()
+def get_decryption_key_from_file():
     # TODO: Private key is saved in a file; read it and use it
-    # TODO: Return private key to decyprt_valuables
+    key_read = 'test'
 
-def generate_key_pair()
-    # TODO: RSA and stuff
+    decryption_key = RSA.importKey(key_read)
+    return decryption_key
+
+def generate_key_pair():
+    random_generator = Random.new().read
+    key = RSA.generate(4096, random_generator)
+    public_key = key.publickey()
+    public_key = public_key.exportKey()
+    print("Public Key: {}".format(public_key))
+
+    private_key = key.exportKey()
+    print("Private Key: {}".format(private_key))
 
 
 if __name__ == "__main__":
@@ -27,3 +33,4 @@ if __name__ == "__main__":
         os.exit(1)
     f = open(os.path.join("pastebot.net", fn), "rb").read()
     decrypt_valuables(f)
+

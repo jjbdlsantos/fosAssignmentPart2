@@ -1,2 +1,2 @@
-# fosAssignmentPart1
-All our python code for the assignment
+# fosAssignmentPart2
+Python source code for Part 2!

@@ -1,8 +1,6 @@
 import os
 
 from Crypto.PublicKey import RSA
-from Crypto import Random
-from base64 import b64decode
 
 decryption_key_file = 'decryption_key.txt'
 # TODO: Get a better password

@@ -2,18 +2,24 @@ import os
 
 from Crypto.Signature import PKCS1_v1_5
 
-
 def sign_file(f):
     # TODO: For Part 2, you'll use public key crypto here
     # The existing scheme just ensures the updates start with the line 'Caesar'
     # This is naive -- replace it with something better!
 
-    # Don't use PKCS #1 alone, because limitation of RSA: m < n
-    return bytes("Caesar\n", "ascii") + f
+    # TODO: hash f?
+    # TODO: Don't use PKCS #1 alone, because limitation of RSA: m < n
+    signing_key = read_signing_key_from_file()
+    signing_object = PKCS1_v1_5.new(signing_key)
+    signature = signing_object.sign(f)
+
+    return bytes(signature, "ascii") + f
+
 
 def read_signing_key_from_file(self)
-    # TODO: Private key is saved in a file; read it and use it
-    # TODO: Return private key to decyprt_valuables
+    # TODO: Private key is saved in a file; read & unhash it (?)
+    signing_key = None
+    return signing_key
 
 
 if __name__ == "__main__":
@@ -28,3 +34,4 @@ if __name__ == "__main__":
     out.write(signed_f)
     out.close()
     print("Signed file written to", signed_fn)
+

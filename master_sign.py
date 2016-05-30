@@ -13,13 +13,13 @@ def sign_file(file):
     # TODO: For Part 2, you'll use public key crypto here
 
     signing_key = get_signing_key_from_file()
-    cipher = PKCS1_v1_5.new(signing_key)
+    sig_scheme = PKCS1_v1_5.new(signing_key)
 
     # Hash the message to compress it to 128 bits before signing
     # Hashing ensures that RSA will be able to sign/encrypt the message
     # (limitation of RSA is that m must be less than n)
     hashed_file = MD5.new(file)
-    signature = cipher.sign(hashed_file)
+    signature = sig_scheme.sign(hashed_file)
     # print("Signature: {}".format(signature))
     return signature + '\n' + file
 

@@ -2,6 +2,7 @@ import os
 
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
+from Crypto.Cipher import AES
 
 # Name of the file where the decryption key is stored
 decryption_key_file = 'decryption_key.txt'
@@ -9,21 +10,36 @@ decryption_key_file = 'decryption_key.txt'
 password = "testtest"
 
 def decrypt_valuables(f):
-    decryption_key = get_decryption_key_from_file()
-    cipher_obj = PKCS1_v1_5.new(decryption_key)
-    # Decode the ciphertext, and return 'error' if it fails
-    decoded_text = cipher_obj.decrypt(f, "Error")
+    print("File: {}".format(f))
+
+    rsa_decryption_key = get_decryption_key_from_file()
+    rsa_cipher = PKCS1_v1_5.new(rsa_decryption_key)
+
+    # Encrypted session key will be the same length as the RSA keys (4096 bits = 512 bytes)
+    session_key_len = 512
+    session_key_and_iv_len = session_key_len + AES.block_size
+
+    # Separate the different components in the encrypted data
+    encrypted_session_key = f[:session_key_len]
+    iv = f[session_key_len:session_key_and_iv_len]
+    ciphertext = f[session_key_and_iv_len:]
+
+    # Decrypt the session key, or assign "Error" if it fails
+    session_key = rsa_cipher.decrypt(encrypted_session_key, "Error")
+
+    # Decrypt the message using AES and the session key
+    aes_cipher = AES.new(session_key, AES.MODE_CFB, iv)
+    decoded_text = aes_cipher.decrypt(ciphertext)
     print(str(decoded_text, "ascii"))
+
 
 def get_decryption_key_from_file():
     # Open file and read the encrypted key
     file_in = open(decryption_key_file, 'rb')
-    encrypted_key = file_in.read()
-    file_in.close()
-
     # Get the key, using the password to decrypt it
-    decryption_key = RSA.importKey(encrypted_key, passphrase=password)
+    decryption_key = RSA.importKey(file_in.read(), passphrase=password)
     #print("Private key read: {}".format(decryption_key.exportKey()))
+    file_in.close()
     return decryption_key
 
 def generate_encryption_keys():
@@ -40,7 +56,7 @@ def generate_encryption_keys():
     # Write the private key to file
     file_out = open(decryption_key_file, "wb")
     file_out.write(encrypted_private_key)
-    file_out.close
+    file_out.close()
     print("Private key: {}".format(key.exportKey()))
 
 

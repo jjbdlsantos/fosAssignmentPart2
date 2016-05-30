@@ -10,9 +10,9 @@ password = "testtest"
 
 def decrypt_valuables(f):
     decryption_key = get_decryption_key_from_file()
-    cipher = PKCS1_v1_5.new(decryption_key)
+    cipher_obj = PKCS1_v1_5.new(decryption_key)
     # Decode the ciphertext, and return 'error' if it fails
-    decoded_text = cipher.decrypt(f, "Error")
+    decoded_text = cipher_obj.decrypt(f, "Error")
     print(str(decoded_text, "ascii"))
 
 def get_decryption_key_from_file():

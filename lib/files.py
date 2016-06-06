@@ -15,8 +15,8 @@ filestore = {}
 valuables = []
 
 # Public RSA key for encryption of data
-verification_key = b'-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsz4MnNhElPo0lnW8paA6\n9lqLVQgdlhu0oQDrTRLY8+8zBgzlOKJoGlIzK7H/TmH2x5A6D31KBeG4UZvM6qKm\nLNlSdeDXEp1hlvwRgq1vR0d2Y8n2p03QZfrc9wxlet5U8+R3GmrYy+4GIrpUlHe6\nJLzhr2PmhX96HARFTakiyb5PpfwFIhYVk5N72iSi55PfXdib9kytRHArHNWXHF76\nISxwm23sXlMjD5tk78nvD12HrtHzQad1Jx8ScbC2a+mk7i3Zi+cpWs6MskKi0Ez2\n6XeZCRqPkdP+LQMg/ZmrfoLqDf1ffkrRjqjQ+UJGrBpkflv0aBmQPwFoV7TL1f0C\nclagCoV/ZFNmohNvSkYxZEndypLDJdKQkU/xTXyne7lUXzbiKNDSNF/EASHVNONR\nnCfBy59+E5RP2XE4r3uiu1HtDMFeU8oMqpnVkWzQEyoZjWyGXQur8FpkoRQ/mrKA\n/UxTb9KxwGXv9tssZ6gdzB9VSedLwim4MAO+PgDPq4wE/MO2ODhv7rCkomqEDIY7\nLIN1Yn8NlGXym0xdjG9M1BtaMb38L/C/eTX+Ical9oH7LML5PUa6vCnGU9gL0Dm5\nlFyNP5DwWV7fBv9sCJuwHQrEDBv3TvxaP8cYD6M4/FU5txgB9v4WUoCeF6cvEaTp\nDl/cqrGd2Dq3R0nQILIAi38CAwEAAQ==\n-----END PUBLIC KEY-----'
-encryption_key = b'-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2mzZeA2+fsjCGoTjRFuU\nivZifvfMPHOmMaT6p8lRjxLlRegd6TzYclEtADqxw5Nch4SueWeHKIq+YmZINnUA\nyLGQGZDKaara+ifySkdcjhQq0KXpOcDhTMSHwnDiuGR29snLhvex3fGYjARBZAxk\nvaSvR1EZqveDkTI68n9d5h+5HHTJq8+nIntOgIvLkjCUo5zcOTY9N2PmgV7hBsQ7\nAV0AXlIRRXFgw/3FKeF1ewKydBpCOAPD6iieY5qPw7FXyh1w7/8bKnbO/sndsq8W\nTni28TnlpIZ/Fr3jgGFQqMJhY97L/KxNumcZd5GoVy4pfmk79cn3w/aozEX8NbQ5\nVUkETUQsjAK8POBwJpRRjgseHRYui0hFTIr4gOfBJ8yyJPzEPz4mn2M2YjSDhqOL\nQrNnsLn7TUmZTEyRxcaJKDdQgTtcTzrwP6PsOKIyxO7KKfrX6fXJPOT19apK2kNS\nUDCCOH3xao9QqWUeHTnhhZiGErrQL6TVN+QIQ2jLIK+Bxe6z4Jd7dykiM0lrev0W\nW60tjvd0IKwQSwvkQoYZi7qAgZ+3Mksl17Y24huw8NVvmOFJLxCINVJop1fG7PKr\nuHCS2s04DIq5jw8icWGJYsED6Wzr8ddgmofYcYAbe7YVKrPRAZ96NducfdoSQKjI\nHXiSymmlKNflAOyD6cjnb+cCAwEAAQ==\n-----END PUBLIC KEY-----'
+verification_key = b'-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsbFhOR17m2fJ/TygGRNF\nSmrW3cJx2vEPSi9X3y4Srgtr5vilfYcIeVy98ujB311w5V0mdG0kyQnQrATb1evV\nTmcU6srzFV42wGTwTfveVVH/EmMV9NafErGIMsPxGlKXonLuUJqmameQ83S9XIkN\nBaV98yZpadfZ1Dr/MgDyJjOMbsMoeeNhj+gK9K5F7T7R8arTlKGmzlhuebr2ZaKp\nXTKCPgegdzhacqNOIDfmnVNugU5LIM4TjFV5UwG50/YsUqQd7BFXADf8Rt8yFbyT\n/RUqbi4/ba9s72dA/cm+iBunX7P4bkbq0YvKbPcuAf3KgW/AHTOsWR4HrH+qhBS5\nd0yF60h/iaOC6808ENQcTDuxJrbOErcHNxTfE5jgn6dhBfGeMh9MInO8N2bzrigd\n6r/KznCjNzA13J0xj5TpNGvyAF8jQxg6sSH9+r0+N205wZbGWOF7Y8wFssyXvfg6\nxYEgMtpkNj5esYSobNMnhYw6iVSeErG7qeQh2WrkwNphVmZPOT+5sr7SUeZnccCT\nd8elaqGEBls5peSMQAknFXS1PqLHCr2MQNmkCX8YrAtpE47v04yi6ijDx9jRIGLw\na+F0FjNzWhlFnab6egRvCHSVQEabkPMVprHSoFn01RoEFsdjh3G3e8wGXSbmgYSc\naFk//TriUJDEEBNVK2Qf0LcCAwEAAQ==\n-----END PUBLIC KEY-----'
+encryption_key = b'-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsaiQEzOBdTe1CxXH3mF2\ntEyiU5hNk6yZ8mirdmO1z+wvkFnlp+deMt7zKNAc08CJNLIEXr/Jm6mDoMaCR1sS\n7NpmL04FqzeRqbsVFMd2eiP05JuY2UZi0tbIeN65ok0NwZHaSTcxUs8ETNuctmxQ\nGmER/CizIMOUjALcTKLW77w1ONJENDmspZKco1SsIbH+CKA4tG3E/fmhEF/xWe3l\nz0JDG3TwIuqjAaJxqiVMIsqptPMXCMEndmJylAlB/eqz2U2kGXI0OdUUcpojF4DJ\ntlmMeTfQFbHo9wtdgngNWtuUkQiOBhKflfIq79ZaII89GMgmoEbGb6NJETXHUL5z\nL0Ss0jIaty3ps9moNyS1l5IUI2ump8EVYpx+CpaW4eACQU1H8D8XKD2NMik7SooD\nWwr6Tyv6IDxZIjL9jA2rmXRbR4+DJwEkKd9sUMRycHFcHypRAGFgVT3WuwstkTbV\n4iuTqIMBiLb6oqUSH7/gYnlCWgqy0gEuc6JY3NV33d3NqrPaItphhR+68l7QEGl6\nX6AO+6ADQANDczeWwePZj6fx4wkC8EygNdOMiIO0Ctj/8JLqsHtIFIvK0Tqwy2c5\nmIc9n/vha/+22YeF6WuJEJzKPsUMG2A96TDLm4PvNyFrDhHk+U4lOtqNrm3vzzZZ\nVqNWMAhJKuZbFTkk6kzI6g8CAwEAAQ==\n-----END PUBLIC KEY-----'
 ###
 
 def save_valuable(data):
@@ -35,6 +35,7 @@ def encrypt_for_master(data):
 
     # Encrypt the data with 128-bit AES, using the session key
     aes_cipher = AES.new(session_key, AES.MODE_CFB, iv)
+
     encrypted_data = aes_cipher.encrypt(data)
 
     return encrypted_session_key + iv + encrypted_data
@@ -72,10 +73,8 @@ def verify_file(f):
 
     # Check if the signature is authentic
     if sig_scheme.verify(hashed_file, signature):
-        print("The signature is authentic.")
         return True
     else:
-        print("The signature is fake.")
         return False
 
 def process_file(fn, f):

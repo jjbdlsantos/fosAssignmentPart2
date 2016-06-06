@@ -6,8 +6,8 @@ from Crypto.Cipher import AES
 
 # Name of the file where the decryption key is stored
 decryption_key_file = 'decryption_key.txt'
-# TODO: Get a better password
-password = "testtest"
+# Password used to decrypt the private key file
+password = "W2[3Gfs-*ug#ABfkGWos1{x8:!d5R?+`]37}-rQU7AJ|ci[YEck1$e]DT;<S9K|q"
 
 def decrypt_valuables(f):
     print("File: {}".format(f))

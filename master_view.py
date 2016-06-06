@@ -10,8 +10,6 @@ decryption_key_file = 'decryption_key.txt'
 password = "W2[3Gfs-*ug#ABfkGWos1{x8:!d5R?+`]37}-rQU7AJ|ci[YEck1$e]DT;<S9K|q"
 
 def decrypt_valuables(f):
-    print("File: {}".format(f))
-
     rsa_decryption_key = get_decryption_key_from_file()
     rsa_cipher = PKCS1_v1_5.new(rsa_decryption_key)
 
@@ -38,7 +36,6 @@ def get_decryption_key_from_file():
     file_in = open(decryption_key_file, 'rb')
     # Get the key, using the password to decrypt it
     decryption_key = RSA.importKey(file_in.read(), passphrase=password)
-    #print("Private key read: {}".format(decryption_key.exportKey()))
     file_in.close()
     return decryption_key
 

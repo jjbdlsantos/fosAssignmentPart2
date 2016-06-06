@@ -6,8 +6,8 @@ from Crypto.Hash import MD5
 
 # Name of the file where the signing key is stored
 signing_key_file = 'signing_key.txt'
-# TODO: Get a better password
-password = "testtest"
+# Password used to decrypt the private key file
+password = "Fn'Q092_Ezdz|0oHUmN%N6fQag+J#uL,eg%21T}8f=OOb6PbAg}|k3Y/KIyoLNWU"
 
 def sign_file(file):
     print("file: {}".format(file))

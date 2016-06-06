@@ -10,8 +10,6 @@ signing_key_file = 'signing_key.txt'
 password = "Fn'Q092_Ezdz|0oHUmN%N6fQag+J#uL,eg%21T}8f=OOb6PbAg}|k3Y/KIyoLNWU"
 
 def sign_file(file):
-    print("file: {}".format(file))
-
     # TODO: For Part 2, you'll use public key crypto here
 
     signing_key = get_signing_key_from_file()
@@ -22,7 +20,6 @@ def sign_file(file):
     # (limitation of RSA is that m must be less than n)
     hashed_file = MD5.new(file)
     signature = sig_scheme.sign(hashed_file)
-    #print("Signature: {}".format(signature))
 
     # Separate the signature and the file contents with three newline characters
     # Ensures that the 'separation string' can't be found within the signature
@@ -34,7 +31,6 @@ def get_signing_key_from_file():
     file_in = open(signing_key_file, 'rb')
     # Get the key, using the password to decrypt it
     signing_key = RSA.importKey(file_in.read(), passphrase=password)
-    #print("Private key read: {}".format(signing_key.exportKey()))
     file_in.close()
     return signing_key
 
@@ -57,8 +53,6 @@ def generate_signing_and_verifying_keys():
 
 
 if __name__ == "__main__":
-    # generate_signing_and_verifying_keys()
-    # get_signing_key_from_file()
     fn = input("Which file in pastebot.net should be signed? ")
     if not os.path.exists(os.path.join("pastebot.net", fn)):
         print("The given file doesn't exist on pastebot.net")
